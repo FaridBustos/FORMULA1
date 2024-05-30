@@ -1,4 +1,196 @@
+-- insercion en la tabla paises
 
+INSERT INTO paises (idpais, nombre) VALUES
+(1, 'Argentina'),
+(2, 'Brasil'),
+(3, 'Chile'),
+(4, 'Colombia'),
+(5, 'Mexico'),
+(6, 'Peru'),
+(7, 'Uruguay'),
+(8, 'Venezuela'),
+(9, 'Espana'),
+(10, 'Francia');
+
+-- insercion en la tabla ciudades
+
+INSERT INTO public.ciudades (idciudad, idpais, nombre) VALUES
+(1, 1, 'Buenos Aires'),
+(2, 1, 'Cordoba'),
+(3, 2, 'Sao Paulo'),
+(4, 2, 'Rio de Janeiro'),
+(5, 3, 'Santiago'),
+(6, 3, 'Valparaiso'),
+(7, 4, 'Bogota'),
+(8, 4, 'Medellin'),
+(9, 5, 'Ciudad de Mexico'),
+(10, 5, 'Guadalajara'),
+(11, 6, 'Lima'),
+(12, 6, 'Cusco'),
+(13, 7, 'Montevideo'),
+(14, 7, 'Punta del Este'),
+(15, 8, 'Caracas'),
+(16, 8, 'Maracaibo'),
+(17, 9, 'Madrid'),
+(18, 9, 'Barcelona'),
+(19, 10, 'Paris'),
+(20, 10, 'Lyon');
+
+-- insercion en la tabla circuitos
+
+INSERT INTO public.circuitos (idcircuito, idciudad, nombre, longitud) VALUES
+(1, 1, 'Circuito de Buenos Aires', 4.3),
+(2, 2, 'Circuito de Cordoba', 3.8),
+(3, 3, 'Autodromo de Interlagos', 4.3),
+(4, 4, 'Circuito de Rio de Janeiro', 4.0),
+(5, 5, 'Circuito de Santiago', 3.2),
+(6, 6, 'Circuito de Valparaiso', 3.7),
+(7, 7, 'Autodromo de Tocancipa', 2.7),
+(8, 8, 'Circuito de Medellin', 3.5),
+(9, 9, 'Autodromo Hermanos Rodriguez', 4.3),
+(10, 10, 'Circuito de Guadalajara', 3.8),
+(11, 11, 'Autodromo de La Chutana', 2.4),
+(12, 12, 'Circuito de Cusco', 3.6),
+(13, 13, 'Autodromo de El Pinar', 3.1),
+(14, 14, 'Circuito de Punta del Este', 3.4),
+(15, 15, 'Autodromo de Caracas', 3.2),
+(16, 16, 'Circuito de Maracaibo', 3.9),
+(17, 17, 'Circuito del Jarama', 3.9),
+(18, 18, 'Circuito de Montmelo', 4.7),
+(19, 19, 'Circuito de Nevers Magny-Cours', 4.4),
+(20, 20, 'Circuito de Paul Ricard', 5.8);
+
+-- insercion en la tabla temporadas
+
+INSERT INTO public.temporadas (idtemporada, fechadeinicio, fechadefin) VALUES
+(1, '2020-03-15', '2020-11-29'),
+(2, '2021-03-28', '2021-12-12'),
+(3, '2022-03-20', '2022-11-27'),
+(4, '2023-03-26', '2023-12-10'),
+(5, '2024-03-24', '2024-11-24');
+
+-- insercion en la tabla equipos
+
+INSERT INTO equipos(idequipo, nombre, paisdeorigen)
+VALUES 
+(1, 'Equipo Gauchos Racing', 1), 
+(2, 'Equipo Samba Racing', 2), 
+(3, 'Equipo Andes F1', 3), 
+(4, 'Equipo Cafe Colombiano F1', 4), 
+(5, 'Equipo Tequila Sunrise F1', 5), 
+(6, 'Equipo Inca F1', 6), 
+(7, 'Equipo Charrua F1', 7), 
+(8, 'Equipo Bolivar F1', 8), 
+(9, 'Equipo Toro Espanol F1', 9), 
+(10, 'Equipo Baguette Racing', 10), 
+(11, 'Equipo Tango F1', 1), 
+(12, 'Equipo Bossa Nova F1', 2), 
+(13, 'Equipo Pisco F1', 6); 
+
+-- insercion en la tabla patrocinadores
+
+INSERT INTO patrocinadores(idpatrocinador, nombre)
+VALUES 
+(1, 'Red Bull'),
+(2, 'Shell'),
+(3, 'Petrobras'),
+(4, 'Telefonica'),
+(5, 'Santander'),
+(6, 'Infiniti'),
+(7, 'Rolex'),
+(8, 'Heineken'),
+(9, 'Puma'),
+(10, 'Hugo Boss'),
+(11, 'Gulf Oil'),
+(12, 'Monster Energy'),
+(13, 'FedEx');
+
+-- insercion en la tabla patrocinadores equipos
+
+INSERT INTO public.patrocinadoresequipos(
+idequipo, idpatrocinador, idtemporada, montopatrocinio, "tipoDePatrocinio")
+VALUES 
+(7, 9, 1, 5000000, 'exclusivo'),
+(11, 2, 1, 3000000, 'no exclusivo'),
+(9, 5, 1, 4500000, 'exclusivo'),
+(6, 6, 1, 2000000, 'no exclusivo'),
+(3, 3, 1, 4000000, 'exclusivo'),
+(8, 10, 1, 6000000, 'no exclusivo'),
+(13, 12, 1, 2500000, 'exclusivo'),
+(2, 3, 1, 3500000, 'no exclusivo'),
+(8, 7, 1, 2800000, 'exclusivo'),
+(5, 4, 1, 3200000, 'no exclusivo'),
+(4, 11, 2, 5000000, 'exclusivo'),
+(13, 5, 2, 3000000, 'no exclusivo'),
+(2, 8, 2, 4500000, 'exclusivo'),
+(6, 1, 2, 2000000, 'no exclusivo'),
+(10, 3, 2, 4000000, 'exclusivo'),
+(1, 6, 2, 6000000, 'no exclusivo'),
+(11, 9, 2, 2500000, 'exclusivo'),
+(9, 7, 2, 3500000, 'no exclusivo'),
+(5, 10, 2, 2800000, 'exclusivo'),
+(7, 12, 2, 3200000, 'no exclusivo'),
+(8, 7, 3, 5000000, 'exclusivo'),
+(12, 9, 3, 3000000, 'no exclusivo'),
+(6, 3, 3, 4500000, 'exclusivo'),
+(5, 10, 3, 2000000, 'no exclusivo'),
+(2, 2, 3, 4000000, 'exclusivo'),
+(3, 8, 3, 6000000, 'no exclusivo'),
+(10, 4, 3, 2500000, 'exclusivo'),
+(1, 5, 3, 3500000, 'no exclusivo'),
+(7, 11, 3, 2800000, 'exclusivo'),
+(9, 1, 3, 3200000, 'no exclusivo'),
+(9, 12, 4, 5000000, 'exclusivo'),
+(4, 6, 4, 3000000, 'no exclusivo'),
+(7, 2, 4, 4500000, 'exclusivo'),
+(1, 10, 4, 2000000, 'no exclusivo'),
+(11, 3, 4, 4000000, 'exclusivo'),
+(5, 5, 4, 6000000, 'no exclusivo'),
+(3, 8, 4, 2500000, 'exclusivo'),
+(10, 7, 4, 3500000, 'no exclusivo'),
+(6, 11, 4, 2800000, 'exclusivo'),
+(2, 1, 4, 3200000, 'no exclusivo'),
+(5, 8, 5, 5000000, 'exclusivo'),
+(12, 3, 5, 3000000, 'no exclusivo'),
+(1, 10, 5, 4500000, 'exclusivo'),
+(8, 4, 5, 2000000, 'no exclusivo'),
+(10, 6, 5, 4000000, 'exclusivo'),
+(2, 1, 5, 6000000, 'no exclusivo'),
+(11, 9, 5, 2500000, 'exclusivo'),
+(6, 11, 5, 3500000, 'no exclusivo'),
+(4, 7, 5, 2800000, 'exclusivo'),
+(7, 12, 5, 3200000, 'no exclusivo');
+
+-- insercion en la tabla grandes premios
+
+INSERT INTO public.grandespremios(
+	idgranpremio, idtemporada, idcircuito, nombre, fechainicio, fechafinalizacion)
+VALUES 
+	(1, 1, 9, 'Gran Premio de Mexico', '2020-03-20', '2020-03-23'),
+	(2, 1, 8, 'Gran Premio de Colombia', '2020-03-23', '2020-03-26'),
+	(3, 1, 7, 'Gran Premio de Colombia', '2020-03-26', '2020-03-29'),
+	(4, 1, 6, 'Gran Premio de Chile', '2020-03-29', '2020-04-01'),
+	(5, 1, 5, 'Gran Premio de Chile', '2020-04-01', '2020-04-04'),
+	(6, 2, 11, 'Gran Premio de Peru', '2021-03-28', '2021-03-31'),
+	(7, 2, 12, 'Gran Premio de Peru', '2021-03-31', '2021-04-03'),
+	(8, 2, 13, 'Gran Premio de Uruguay', '2021-04-03', '2021-04-06'),
+	(9, 2, 14, 'Gran Premio de Uruguay', '2021-04-06', '2021-04-09'),
+	(10, 2, 15, 'Gran Premio de Venezuela', '2021-04-09', '2021-04-12'),
+	(11, 3, 20, 'Gran Premio de Francia', '2022-03-26', '2022-03-29'),
+	(12, 3, 19, 'Gran Premio de Francia', '2022-03-29', '2022-04-01'),
+	(13, 3, 18, 'Gran Premio de Espana', '2022-04-01', '2022-04-04'),
+	(14, 3, 17, 'Gran Premio de Espana', '2022-04-04', '2022-04-07'),
+	(15, 3, 16, 'Gran Premio de Venezuela', '2022-04-07', '2022-04-10'),
+	(16, 4, 15, 'Gran Premio de Venezuela', '2023-03-26', '2023-03-29'),
+	(17, 4, 5, 'Gran Premio de Chile', '2023-03-29', '2023-04-01'),
+	(18, 4, 4, 'Gran Premio de Brasil', '2023-04-01', '2023-04-04'),
+	(19, 4, 3, 'Gran Premio de Brasil', '2023-04-04', '2023-04-07'),
+	(20, 4, 2, 'Gran Premio de Argentina', '2023-04-07', '2023-04-10'),
+	(21, 5, 1, 'Gran Premio de Argentina', '2024-03-24', '2024-03-27'),
+	(22, 5, 3, 'Gran Premio de Brasil', '2024-03-27', '2024-03-30'),
+	(23, 5, 6, 'Gran Premio de Chile', '2024-03-30', '2024-04-02'),
+	(24, 5, 8, 'Gran Premio de Colombia', '2024-04-02', '2024-04-05'),
+	(25, 5, 10, 'Gran Premio de Mexico', '2024-04-05', '2024-04-08');
 
 -- Insercion en la tabla puntajes
 INSERT INTO Puntajes (idPuntaje, posicion, puntaje) VALUES
@@ -27,7 +219,7 @@ INSERT INTO Motores (idMotor, marca, numeroDeValvulas, modelo, materialDelCiguen
 (9, 'Ferrari', 24, '065/6', 'Acero', 'Titanio'),
 (10, 'Ferrari', 24, '065/6', 'Acero', 'Titanio');
 
--- Insercion en la tabla neumaticos
+-- Insercion en la tabla Tipos De Neumaticos
 
 INSERT INTO TiposDeNeumaticos (idTipoDeNeumatico, dureza) VALUES
 (1, 'DURO'),
@@ -259,3 +451,11 @@ VALUES
 (10), (15), (70), (20), (80), (85), (25), (90), (95), 
 (100), (105), (110), (115), (120), (125);
 
+-- insercion en la tabla tipos de clasificacion
+
+INSERT INTO public.tiposdeclasificacion(
+	idtipodeclasificacion, nombre)
+	VALUES 
+    (1, 'Q1'),
+    (2, 'Q2'),
+    (3, 'Q3');
