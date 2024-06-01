@@ -255,3 +255,24 @@ create table Noticias(
 );
 
 
+create table plataformas(
+    idplataforma int primary key,
+    nombre varchar(100) not null
+);
+
+
+create table PlataformasCarreras(
+    idplataforma int primary key,
+    nombre varchar(100) not null
+);
+
+create table PlataformasCarreras(
+    idCarrera INT NOT NULL,
+	idPlataforma INT NOT NULL,
+	audiencia BIGINT NOT NULL,
+	PRIMARY KEY (idCarrera, idPlataforma),
+	foreign key (idCarrera) references carreras(idCarrera),
+	foreign key (idPlataforma) references plataformas(idPlataforma)
+);
+
+
