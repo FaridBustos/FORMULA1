@@ -4,11 +4,14 @@
     JOIN ciudades as CD on CD.idciudad = CT.idciudad
     JOIN public.paises as PS on CD.idpais = PS.idpais;
 
--- ¿Cual es el nombre del circuito mas extenso que se utilizo en una temporada determinada?
+-- ¿Cual es el nombre y la longitud del circuito mas extenso que se utilizo la temporada 2?
+SELECT CIRCUITOS.NOMBRE, CIRCUITOS.LONGITUD
+FROM GRANDESPREMIOS 
+JOIN CIRCUITOS ON CIRCUITOS.IDCIRCUITO = GRANDESPREMIOS.IDCIRCUITO
+WHERE GRANDESPREMIOS.IDTEMPORADA = 2 ORDER BY CIRCUITOS.LONGITUD DESC LIMIT 1;
 
-
--- ¿Cuales son los circuitos aptos para realizar carreras formula 1?
-
+-- ¿Cuales son los circuitos que no son aptos para realizar carreras formula 1?
+SELECT * FROM CIRCUITOS WHERE LONGITUD < 3;
 
 -- ¿Cual es la marca, el tipo de neumaticos y el peso del vehıculo del competidor X?
 

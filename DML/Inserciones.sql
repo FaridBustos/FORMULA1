@@ -58,7 +58,15 @@ INSERT INTO public.circuitos (idcircuito, idciudad, nombre, longitud) VALUES
 (17, 17, 'Circuito del Jarama', 3.9),
 (18, 18, 'Circuito de Montmelo', 4.7),
 (19, 19, 'Circuito de Nevers Magny-Cours', 4.4),
-(20, 20, 'Circuito de Paul Ricard', 5.8);
+(20, 20, 'Circuito de Paul Ricard', 5.8),
+(21, 8, 'Circuito del Pantano', 3.1), 
+(22, 15, 'Circuito de la Montaña', 2.8), 
+(23, 6, 'Circuito del Desierto', 1.8), 
+(24, 12, 'Circuito del Valle', 2.2), 
+(25, 19, 'Circuito del Campo', 2.9), 
+(26, 2, 'Circuito del Lago', 2.6), 
+(27, 17, 'Circuito de la Colina', 2.9),
+(28, 3, 'Circuito del Bosque', 2.5);
 
 -- insercion en la tabla temporadas
 
