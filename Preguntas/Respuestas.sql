@@ -11,14 +11,77 @@ JOIN CIRCUITOS ON CIRCUITOS.IDCIRCUITO = GRANDESPREMIOS.IDCIRCUITO
 WHERE GRANDESPREMIOS.IDTEMPORADA = 2 ORDER BY CIRCUITOS.LONGITUD DESC LIMIT 1;
 
 -- ¿Cuales son los circuitos que no son aptos para realizar carreras formula 1?
-SELECT * FROM CIRCUITOS WHERE LONGITUD < 3;
+SELECT * FROM CIRCUITOS WHERE CIRCUITOS.LONGITUD < 3;
 
--- ¿Cual es la marca, el tipo de neumaticos y el peso del vehıculo del competidor X?
+-- ¿Cual es el nombre del equipo, el tipo de neumaticos y el peso del vehıculo del competidor X?
+create or replace function carroDePiloto(id_Piloto int, id_carrera int)
+returns table (
+    nombre_equipo varchar(50),
+    peso_vehiculo double precision,
+    dureza_neumatico varchar(20)
+) as
+$$
+begin
+    return query
+    SELECT EQUIPOS.NOMBRE, VEHICULOS.PESO, TIPOSDENEUMATICOS.DUREZA
+    FROM PARTICIPACIONES
+    JOIN VEHICULOS ON VEHICULOS.IDVEHICULO = PARTICIPACIONES.IDVEHICULO
+    JOIN TIPOSDENEUMATICOS ON TIPOSDENEUMATICOS.IDTIPODENEUMATICO = VEHICULOS.IDTIPODENEUMATICO
+    JOIN EQUIPOS ON EQUIPOS.IDEQUIPO = VEHICULOS.IDEQUIPO
+    WHERE PARTICIPACIONES.idpersona = id_Piloto AND PARTICIPACIONES.idcarrera = id_carrera;
+end;
+$$
+language plpgsql;
 
 
--- ¿Cual es la posicion, nombre del piloto, nacionalidad , el modelo de vehıculo y los puntos que
--- tienen los pilotos que participan en una temporada? Ordenelos por posicion.
+SELECT * FROM carroDePiloto(1, 1);
 
+
+
+-- ¿Cual es la posicion, nombre del piloto, el peso del vehiculo y los puntos que
+-- tienen los pilotos que participan en la temporada 2? Ordenelos por posicion.
+CREATE OR REPLACE FUNCTION TiempoDeTodasLasVueltas(id_participacion INT)
+RETURNS INTERVAL AS $$
+DECLARE
+    tiempototalV INTERVAL;
+BEGIN
+    SELECT SUM(COALESCE(VUELTAS.tiempo, '00:00:00'::INTERVAL) + COALESCE(SANCIONES.penalizacion, '00:00:00'::INTERVAL)) AS TiempoTotal INTO tiempototalV
+    FROM PARTICIPACIONES 
+    LEFT JOIN VUELTAS ON VUELTAS.IDPARTICIPACION = PARTICIPACIONES.IDPARTICIPACION
+    LEFT JOIN SANCIONESVUELTAS ON SANCIONESVUELTAS.IDVUELTA = VUELTAS.IDVUELTA
+    LEFT JOIN SANCIONES ON SANCIONES.IDSANCION = SANCIONESVUELTAS.IDSANCION
+    WHERE VUELTAS.IDPARTICIPACION = id_participacion;
+    
+    RETURN tiempototalV;
+END;
+$$ LANGUAGE plpgsql;
+
+WITH Rankings AS (
+    SELECT 
+        *,
+        DENSE_RANK() OVER (ORDER BY TiempoDeTodasLasVueltas(PARTICIPACIONES.idparticipacion) ASC) AS Ranking
+    FROM 
+        PARTICIPACIONES 
+        JOIN CARRERAS ON CARRERAS.idcarrera = PARTICIPACIONES.idcarrera
+        JOIN GRANDESPREMIOS ON GRANDESPREMIOS.idgranpremio = CARRERAS.idgranpremio
+        JOIN TEMPORADAS ON TEMPORADAS.idtemporada = GRANDESPREMIOS.idtemporada
+    WHERE 
+        PARTICIPACIONES.idcarrera = 5
+)
+SELECT 
+    Rankings.Ranking,
+    PERSONAS.NOMBRE,
+    PUNTAJES.puntaje,
+    TiempoDeTodasLasVueltas(Rankings.idparticipacion) AS TiempoTotal
+FROM 
+    Rankings
+    JOIN PARTICIPACIONES ON PARTICIPACIONES.idparticipacion = Rankings.idparticipacion
+    JOIN VEHICULOS ON VEHICULOS.idvehiculo = PARTICIPACIONES.idvehiculo
+    JOIN PILOTOS ON PILOTOS.idpersona = PARTICIPACIONES.idpersona
+    JOIN PERSONAS ON PERSONAS.idpersona = PILOTOS.idpersona
+    LEFT JOIN PUNTAJES ON PUNTAJES.POSICION = Rankings.Ranking
+ORDER BY 
+    TiempoTotal ASC;
 
 -- ¿Cual es el nombre, numero de integrantes y el nombre del patrocinador de los equipos que
 -- participan en una temporada?
