@@ -1,10 +1,10 @@
--- ¿Cual es el nombre y el pais de las competiciones que se dieron en una temporada especıfica?
-    SELECT GP.nombre as "Gran Premio", PS.nombre as "Pais" from public.grandespremios as GP
-    JOIN circuitos as CT on CT.idcircuito = GP.idcircuito
-    JOIN ciudades as CD on CD.idciudad = CT.idciudad
-    JOIN public.paises as PS on CD.idpais = PS.idpais;
+-- ¿Cual es el nombre y el pais de las competiciones que se dieron en una temporada especifica?
+SELECT GP.nombre as "Gran Premio", PS.nombre as "Pais" from public.grandespremios as GP
+JOIN circuitos as CT on CT.idcircuito = GP.idcircuito
+JOIN ciudades as CD on CD.idciudad = CT.idciudad
+JOIN public.paises as PS on CD.idpais = PS.idpais;
 
--- ¿Cual es el nombre y la longitud del circuito mas extenso que se utilizo la temporada 2?
+-- ¿Cual es el nombre y la longitud del circuito mas extenso que se utilizo en una temporada en especifico?
 SELECT CIRCUITOS.NOMBRE, CIRCUITOS.LONGITUD
 FROM GRANDESPREMIOS 
 JOIN CIRCUITOS ON CIRCUITOS.IDCIRCUITO = GRANDESPREMIOS.IDCIRCUITO
@@ -13,7 +13,7 @@ WHERE GRANDESPREMIOS.IDTEMPORADA = 2 ORDER BY CIRCUITOS.LONGITUD DESC LIMIT 1;
 -- ¿Cuales son los circuitos que no son aptos para realizar carreras formula 1?
 SELECT * FROM CIRCUITOS WHERE CIRCUITOS.LONGITUD < 3;
 
--- ¿Cual es el nombre del equipo, el tipo de neumaticos y el peso del vehıculo del competidor X?
+-- ¿Cual es el nombre del equipo, el tipo de neumaticos y el peso del vehıculo del competidor X en una carrera en especifico?
 create or replace function carroDePiloto(id_Piloto int, id_carrera int)
 returns table (
     nombre_equipo varchar(50),
@@ -56,32 +56,26 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-WITH Rankings AS (
+CREATE OR REPLACE FUNCTION ObtenerRankingDeCarrera(id_carrera INT)
+RETURNS TABLE (
+    id_participacion INT,
+    tiempo_total INTERVAL,
+    ranking INT
+) AS $$
+BEGIN
+    RETURN QUERY
     SELECT 
-        *,
-        DENSE_RANK() OVER (ORDER BY TiempoDeTodasLasVueltas(PARTICIPACIONES.idparticipacion) ASC) AS Ranking
-    FROM 
-        PARTICIPACIONES 
-        JOIN CARRERAS ON CARRERAS.idcarrera = PARTICIPACIONES.idcarrera
-        JOIN GRANDESPREMIOS ON GRANDESPREMIOS.idgranpremio = CARRERAS.idgranpremio
-        JOIN TEMPORADAS ON TEMPORADAS.idtemporada = GRANDESPREMIOS.idtemporada
-    WHERE 
-        PARTICIPACIONES.idcarrera = 5
-)
-SELECT 
-    Rankings.Ranking,
-    PERSONAS.NOMBRE,
-    PUNTAJES.puntaje,
-    TiempoDeTodasLasVueltas(Rankings.idparticipacion) AS TiempoTotal
-FROM 
-    Rankings
-    JOIN PARTICIPACIONES ON PARTICIPACIONES.idparticipacion = Rankings.idparticipacion
-    JOIN VEHICULOS ON VEHICULOS.idvehiculo = PARTICIPACIONES.idvehiculo
-    JOIN PILOTOS ON PILOTOS.idpersona = PARTICIPACIONES.idpersona
-    JOIN PERSONAS ON PERSONAS.idpersona = PILOTOS.idpersona
-    LEFT JOIN PUNTAJES ON PUNTAJES.POSICION = Rankings.Ranking
-ORDER BY 
-    TiempoTotal ASC;
+        PARTICIPACIONES.IDPARTICIPACION, 
+        TiempoDeTodasLasVueltas(PARTICIPACIONES.IDPARTICIPACION) AS tiempo_total,
+        DENSE_RANK() OVER (ORDER BY TiempoDeTodasLasVueltas(PARTICIPACIONES.IDPARTICIPACION) ASC) AS ranking
+    FROM PARTICIPACIONES 
+    JOIN CARRERAS ON CARRERAS.IDCARRERA = PARTICIPACIONES.IDCARRERA
+    WHERE CARRERAS.IDCARRERA = id_carrera
+    ORDER BY TiempoDeTodasLasVueltas(PARTICIPACIONES.IDPARTICIPACION) ASC;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 -- ¿Cual es el nombre, numero de integrantes y el nombre del patrocinador de los equipos que
 -- participan en una temporada?

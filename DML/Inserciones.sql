@@ -45,11 +45,11 @@ INSERT INTO public.circuitos (idcircuito, idciudad, nombre, longitud) VALUES
 (4, 4, 'Circuito de Rio de Janeiro', 4.0),
 (5, 5, 'Circuito de Santiago', 3.2),
 (6, 6, 'Circuito de Valparaiso', 3.7),
-(7, 7, 'Autodromo de Tocancipa', 2.7),
+(7, 7, 'Autodromo de Tocancipa', 3.2),
 (8, 8, 'Circuito de Medellin', 3.5),
 (9, 9, 'Autodromo Hermanos Rodriguez', 4.3),
 (10, 10, 'Circuito de Guadalajara', 3.8),
-(11, 11, 'Autodromo de La Chutana', 2.4),
+(11, 11, 'Autodromo de La Chutana', 3.2),
 (12, 12, 'Circuito de Cusco', 3.6),
 (13, 13, 'Autodromo de El Pinar', 3.1),
 (14, 14, 'Circuito de Punta del Este', 3.4),
@@ -58,7 +58,9 @@ INSERT INTO public.circuitos (idcircuito, idciudad, nombre, longitud) VALUES
 (17, 17, 'Circuito del Jarama', 3.9),
 (18, 18, 'Circuito de Montmelo', 4.7),
 (19, 19, 'Circuito de Nevers Magny-Cours', 4.4),
-(20, 20, 'Circuito de Paul Ricard', 5.8);
+(20, 20, 'Circuito de Paul Ricard', 5.8),
+(21, 7, 'Circuito de lenis', 2.0),
+(22, 4, 'Circuito de simon bolivar', 2.5);
 
 -- insercion en la tabla temporadas
 
