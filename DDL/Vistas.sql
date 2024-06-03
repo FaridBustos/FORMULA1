@@ -73,3 +73,14 @@ FROM Pilotos pi
     JOIN Sanciones s ON sv.idSancion = s.idSancion
     JOIN Carreras c ON pa.idCarrera = c.idCarrera;
 
+
+-- estados de Pilotos en todas las carreras
+CREATE OR REPLACE VIEW EstadosDePilotos AS
+SELECT 
+PERSONAS.NOMBRE AS PILOTO, 
+tiposestadospiloto.NOMBRE AS ESTADO, 
+pilotosestadopilotos.FECHADEINICIO, 
+pilotosestadopilotos.FECHADEFIN
+FROM pilotosestadopilotos
+JOIN tiposestadospiloto ON tiposestadospiloto.IDTIPOESTADOPILOTO = pilotosestadopilotos.IDTIPOESTADOPILOTO
+JOIN PERSONAS ON PERSONAS.IDPERSONA = pilotosestadopilotos.IDPERSONA;

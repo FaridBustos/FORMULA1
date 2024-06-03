@@ -14,25 +14,6 @@ WHERE GRANDESPREMIOS.IDTEMPORADA = 2 ORDER BY CIRCUITOS.LONGITUD DESC LIMIT 1;
 SELECT * FROM CIRCUITOS WHERE CIRCUITOS.LONGITUD < 3;
 
 -- ¿Cual es el nombre del equipo, el tipo de neumaticos y el peso del vehıculo del competidor X en una carrera en especifico?
-create or replace function carroDePiloto(id_Piloto int, id_carrera int)
-returns table (
-    nombre_equipo varchar(50),
-    peso_vehiculo double precision,
-    dureza_neumatico varchar(20)
-) as
-$$
-begin
-    return query
-    SELECT EQUIPOS.NOMBRE, VEHICULOS.PESO, TIPOSDENEUMATICOS.DUREZA
-    FROM PARTICIPACIONES
-    JOIN VEHICULOS ON VEHICULOS.IDVEHICULO = PARTICIPACIONES.IDVEHICULO
-    JOIN TIPOSDENEUMATICOS ON TIPOSDENEUMATICOS.IDTIPODENEUMATICO = VEHICULOS.IDTIPODENEUMATICO
-    JOIN EQUIPOS ON EQUIPOS.IDEQUIPO = VEHICULOS.IDEQUIPO
-    WHERE PARTICIPACIONES.idpersona = id_Piloto AND PARTICIPACIONES.idcarrera = id_carrera;
-end;
-$$
-language plpgsql;
-
 
 SELECT * FROM carroDePiloto(1, 1);
 
@@ -40,41 +21,6 @@ SELECT * FROM carroDePiloto(1, 1);
 
 -- ¿Cual es el nombre del piloto, y los puntos que
 -- tienen los pilotos que participan en la temporada 2? Ordenelos por puntos.
-CREATE OR REPLACE FUNCTION TiempoDeTodasLasVueltas(id_participacion INT)
-RETURNS INTERVAL AS $$
-DECLARE
-    tiempototalV INTERVAL;
-BEGIN
-    SELECT SUM(COALESCE(VUELTAS.tiempo, '00:00:00'::INTERVAL) + COALESCE(SANCIONES.penalizacion, '00:00:00'::INTERVAL)) AS TiempoTotal INTO tiempototalV
-    FROM PARTICIPACIONES 
-    LEFT JOIN VUELTAS ON VUELTAS.IDPARTICIPACION = PARTICIPACIONES.IDPARTICIPACION
-    LEFT JOIN SANCIONESVUELTAS ON SANCIONESVUELTAS.IDVUELTA = VUELTAS.IDVUELTA
-    LEFT JOIN SANCIONES ON SANCIONES.IDSANCION = SANCIONESVUELTAS.IDSANCION
-    WHERE VUELTAS.IDPARTICIPACION = id_participacion;
-    
-    RETURN tiempototalV;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION ObtenerRankingDeCarrera(id_carrera INT)
-RETURNS TABLE (
-    id_participacion INT,
-    tiempo_total INTERVAL,
-    ranking INT
-) AS $$
-BEGIN
-    RETURN QUERY
-    SELECT 
-        PARTICIPACIONES.IDPARTICIPACION, 
-        TiempoDeTodasLasVueltas(PARTICIPACIONES.IDPARTICIPACION) AS tiempo_total,
-        DENSE_RANK() OVER (ORDER BY TiempoDeTodasLasVueltas(PARTICIPACIONES.IDPARTICIPACION) ASC) AS ranking
-    FROM PARTICIPACIONES 
-    JOIN CARRERAS ON CARRERAS.IDCARRERA = PARTICIPACIONES.IDCARRERA
-    WHERE CARRERAS.IDCARRERA = id_carrera
-    ORDER BY TiempoDeTodasLasVueltas(PARTICIPACIONES.IDPARTICIPACION) ASC;
-END;
-$$ LANGUAGE plpgsql;
-
 SELECT 
 PERSONAS.NOMBRE,
 SUM(PUNTAJES.PUNTAJE) AS PUNTAJETOTAL
