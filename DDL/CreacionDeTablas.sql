@@ -35,6 +35,7 @@ create table PatrocinadoresEquipos(
     idPatrocinador int not null,
     idTemporada int not null,
     montoPatrocinio float,
+    tipoDePatrocinio varchar(55),
     foreign key (idEquipo) references Equipos(idEquipo),
     foreign key (idPatrocinador) references  Patrocinadores(idPatrocinador),
     foreign key (idTemporada) references  Temporadas(idTemporada),
@@ -173,21 +174,6 @@ create table CarrerasClasificatorias(
 );
 
 
-create table Q1(
-    idCarrera int primary key,
-    foreign key (idCarrera) references CarrerasClasificatorias(idCarrera)
-);
-
-create table Q2(
-    idCarrera int primary key,
-    foreign key (idCarrera) references CarrerasClasificatorias(idCarrera)
-);
-
-create table Q3(
-    idCarrera int primary key,
-    foreign key (idCarrera) references CarrerasClasificatorias(idCarrera)
-);
-
 
 create table Puntajes(
     idPuntaje int primary key,
@@ -199,12 +185,13 @@ create table Participaciones (
     idParticipacion int primary key,
     idVehiculo int not null,
     idCarrera int not null,
-    idPuntaje int,
     idPersona int not null,
+    posicionDeSalida int not null,
+    posicionDeLlegada int not null,
     foreign key (idVehiculo) references Vehiculos(idVehiculo),
     foreign key (idCarrera) references Carreras(idCarrera),
     foreign key (idPersona) references Pilotos(idPersona),
-    unique (idVehiculo,idCarrera, idPersona)
+    unique (idParticipacion,idVehiculo,idCarrera, idPersona)
 );
 
 create table Vueltas(
@@ -254,25 +241,19 @@ create table Noticias(
     hora time not null
 );
 
-
-create table plataformas(
-    idplataforma int primary key,
-    nombre varchar(100) not null
+create table Plataformas(
+  idPlataforma int primary key,
+  nombre varchar(100) not null
 );
 
 
 create table PlataformasCarreras(
-    idplataforma int primary key,
-    nombre varchar(100) not null
-);
-
-create table PlataformasCarreras(
-    idCarrera INT NOT NULL,
-	idPlataforma INT NOT NULL,
-	audiencia BIGINT NOT NULL,
-	PRIMARY KEY (idCarrera, idPlataforma),
-	foreign key (idCarrera) references carreras(idCarrera),
-	foreign key (idPlataforma) references plataformas(idPlataforma)
+    idPlataformasCarreras int primary key,
+    audencia bigint not null,
+    idPlataforma int not null,
+    idCarrera int not null,
+    foreign key (idPlataforma) references Plataformas(idPlataforma),
+    foreign key (idCarrera) references Carreras(idCarrera)
 );
 
 

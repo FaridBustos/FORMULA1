@@ -1,6 +1,6 @@
 -- Vistas
 
--- ¿Cual es el nombre y el pais de las competiciones que se dieron en una temporada especıfica?
+-- Nombre y país de las competiciones en una temporada en específico.
 
 CREATE VIEW nombrePaisCompeticion
 as
@@ -10,18 +10,9 @@ as
     JOIN public.paises as PS on CD.idpais = PS.idpais;
 
 
--- ¿Cual es el nombre del equipo con mas puntos en toda la historia de la Formula 1?
+-- Equipo con más puntos de toda la historia de la formula 1.
 
-CREATE VIEW equipoMaxPuntos
-as
-    SELECT EQ.idEquipo, EQ.nombre as nombreEquipo, sum(p.puntaje) as totalPuntos
-    FROM participaciones PA
-    JOIN puntajes P on PA.idpuntaje = P.idpuntaje
-    JOIN vehiculos VH on PA.idvehiculo = VH.idvehiculo
-    JOIN equipos EQ on EQ.idequipo = VH.idequipo
-    GROUP BY EQ.idEquipo, EQ.nombre
-    ORDER BY EQ.idequipo,EQ.nombre
-    LIMIT 1;
+
 
 
 
