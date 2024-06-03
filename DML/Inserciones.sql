@@ -227,20 +227,21 @@ INSERT INTO TiposDeNeumaticos (idTipoDeNeumatico, dureza) VALUES
 (3, 'SUAVE');
 
 -- Insercion en la tabla vehiculos
-INSERT INTO Vehiculos (idVehiculo, idTipoDeMotor, idTipoDeNeumatico, idEquipo, peso) VALUES
-(1, 1, 1, 1, 752.5),
-(2, 2, 2, 2, 751.0),
-(3, 3, 3, 3, 753.0),
-(4, 4, 1, 4, 750.5),
-(5, 5, 2, 5, 752.0),
-(6, 6, 3, 6, 751.5),
-(7, 7, 1, 7, 752.3),
-(8, 8, 2, 8, 751.8),
-(9, 9, 3, 9, 753.1),
-(10, 10, 1, 10, 750.9),
-(11, 4, 2, 11, 752.7),
-(12, 3, 3, 12, 750.4),
-(13, 2, 1, 13, 753.6);
+INSERT INTO Vehiculos (idvehiculo, idtipodemotor, idtipodeneumatico, idequipo, peso, modelo, marca) VALUES
+(1, 1, 1, 1, 752.5, '2020', 'Honda'),
+(2, 2, 2, 2, 751.0, '2021', 'Tesla'),
+(3, 3, 3, 3, 753.0, '2019', 'Toyota'),
+(4, 4, 1, 4, 750.5, '2022', 'Ford'),
+(5, 5, 2, 5, 752.0, '2018', 'Subaru'),
+(6, 6, 3, 6, 751.5, '2021', 'Audi'),
+(7, 7, 1, 7, 752.3, '2020', 'BMW'),
+(8, 8, 2, 8, 751.8, '2019', 'Mazda'),
+(9, 9, 3, 9, 753.1, '2022', 'Jeep'),
+(10, 10, 1, 10, 750.9, '2020', 'Mercedes-Benz'),
+(11, 4, 2, 11, 752.7, '2018', 'Nissan'),
+(12, 3, 3, 12, 750.4, '2021', 'Hyundai'),
+(13, 2, 1, 13, 753.6, '2019', 'Ford');
+
 
 -- Insercion en la tabla noticias
 

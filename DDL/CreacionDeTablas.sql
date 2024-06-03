@@ -110,6 +110,8 @@ create table Vehiculos(
     idTipoDeNeumatico int not null,
     idEquipo int not null,
     peso float not null,
+	modelo varchar(100) not null,
+	marca varchar(100) not null,
     foreign key (idTipoDeMotor) references Motores(idMotor),
     foreign key (idTipoDeNeumatico) references TiposDeNeumaticos(idTipoDeNeumatico),
     foreign key (idEquipo) references  Equipos(idEquipo)
@@ -197,7 +199,7 @@ create table Participaciones (
 create table Vueltas(
     idVuelta int primary key,
     idParticipacion int not null,
-    tiempo time not null,
+    tiempo interval not null,
     foreign key (idParticipacion) references Participaciones(idParticipacion)
 );
 
@@ -213,7 +215,7 @@ create table Accidentes(
 create table ParadaEnBoxes(
     idParadaEnBox int primary key,
     idVuelta int not null,
-    duracion time,
+    duracion interval,
     serviciosRealizados varchar(255),
     foreign key (idVuelta) references Vueltas(idVuelta)
 );
@@ -221,7 +223,7 @@ create table ParadaEnBoxes(
 create table Sanciones(
     idSancion int primary key,
     descripcion varchar(255),
-    penalizacion time not null
+    penalizacion interval not null
 );
 
 create table SancionesVueltas(
