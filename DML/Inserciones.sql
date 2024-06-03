@@ -3655,3 +3655,7 @@ INSERT INTO PlataformasCarreras (idPlataformasCarreras, audencia, idPlataforma, 
 (28, 130000, 8, 6),
 (29, 680000, 9, 6),
 (30, 430000, 10, 6);
+
+INSERT INTO public.tiposdecarreras(
+	idtipodecarrera, nombre)
+	VALUES (1, 'principal'), (2, 'libre'), (3, 'clasificatoria');

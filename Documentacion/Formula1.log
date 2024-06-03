@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.5.26)  2 JUN 2024 17:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.5.26)  2 JUN 2024 23:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -391,7 +391,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {C:/Users/farid/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] [3] [4] 
 [5] [6] [7] [8]
-<./images/f1_conceptual.png, id=143, 8071.15375pt x 5957.25626pt>
+<./images/f1_conceptual.png, id=147, 8071.15375pt x 5957.25626pt>
 File: ./images/f1_conceptual.png Graphic file (type png)
 <use ./images/f1_conceptual.png>
 Package pdftex.def Info: ./images/f1_conceptual.png  used on input line 597.
@@ -402,18 +402,23 @@ Overfull \hbox (15.0pt too wide) in paragraph at lines 597--598
  []
 
 [9]
-<./images/f1_Logico.jpg, id=150, 2569.6pt x 2219.29124pt>
-File: ./images/f1_Logico.jpg Graphic file (type jpg)
-<use ./images/f1_Logico.jpg>
-Package pdftex.def Info: ./images/f1_Logico.jpg  used on input line 601.
-(pdftex.def)             Requested size: 443.57848pt x 383.09906pt.
+<./images/f1_Logico.png, id=153, 3713.875pt x 3207.985pt>
+File: ./images/f1_Logico.png Graphic file (type png)
+<use ./images/f1_Logico.png>
+Package pdftex.def Info: ./images/f1_Logico.png  used on input line 601.
+(pdftex.def)             Requested size: 443.57848pt x 383.13045pt.
 
 Overfull \hbox (15.0pt too wide) in paragraph at lines 601--602
 [][] 
  []
 
-[10 <./images/f1_conceptual.png>] [11 <./images/f1_Logico.jpg>] [12]
-(Formula1.aux
+[10 <./images/f1_conceptual.png>] [11 <./images/f1_Logico.png (PNG copy)>]
+Overfull \hbox (288.97263pt too wide) in paragraph at lines 640--641
+[]\OT1/cmr/m/n/14.4 Accede al vi-deo dan-do click []aqui[] o in-gren-san-do el 
+si-guien-te link "https://www.youtube.com/watch?v=aQmd6JreAQ4" 
+ []
+
+[12] (Formula1.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 )
@@ -428,14 +433,14 @@ Package rerunfilecheck Warning: File `Formula1.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `Formula1.out':
-(rerunfilecheck)             Before: 5FE7E78D52DC4ED72FE83CDEEAAC6BE3;2865
-(rerunfilecheck)             After:  0BC739DBE78979D325482BECEE4B0C69;2982.
+(rerunfilecheck)             Before: 0BC739DBE78979D325482BECEE4B0C69;2982
+(rerunfilecheck)             After:  44942F2D1ACC25AD9D4D6032D4CA1785;3051.
  ) 
 Here is how much of TeX's memory you used:
  11848 strings out of 474485
- 187433 string characters out of 5743734
+ 187421 string characters out of 5743734
  1938542 words of memory out of 5000000
- 33957 multiletter control sequences out of 15000+600000
+ 33956 multiletter control sequences out of 15000+600000
  562353 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,6n,79p,386b,604s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -445,9 +450,9 @@ ts/cm/cmbx12.pfb><C:/Users/farid/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/amsfonts/cm/cmr10.pfb><C:/Users/farid/AppData/Local/Programs/MiKTeX/fonts/ty
 pe1/public/amsfonts/cm/cmr12.pfb><C:/Users/farid/AppData/Local/Programs/MiKTeX/
 fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on Formula1.pdf (12 pages, 1895256 bytes).
+Output written on Formula1.pdf (12 pages, 2262666 bytes).
 PDF statistics:
- 223 PDF objects out of 1000 (max. 8388607)
- 60 named destinations out of 1000 (max. 500000)
- 211 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 229 PDF objects out of 1000 (max. 8388607)
+ 61 named destinations out of 1000 (max. 500000)
+ 219 words of extra memory for PDF output out of 10000 (max. 10000000)
 
